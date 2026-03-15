@@ -88,7 +88,7 @@ export default async function NotePage(props: {
               <div className="flex gap-2">
                 {note.tags.map((tag) => (
                   <span key={tag} className="text-[9px] font-black uppercase tracking-widest px-2 py-0.5 border border-primary/20 rounded-full hover:bg-primary/5 transition-colors cursor-pointer">
-                    #{tag}
+                    {tag}
                   </span>
                 ))}
               </div>

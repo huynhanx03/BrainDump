@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
 import remarkParse from 'remark-parse';
+import remarkGfm from 'remark-gfm';
 import rehypeStringify from 'rehype-stringify';
 import rehypeRaw from 'rehype-raw';
 import rehypeSlug from 'rehype-slug';
@@ -82,8 +83,13 @@ export async function getNoteData(slug: string, lang: 'EN' | 'VI'): Promise<Note
     }
   }
 
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-  const { data, content } = matter(fileContents);
+  let fileContents = fs.readFileSync(fullPath, 'utf8');
+  let { data, content } = matter(fileContents);
+
+  // Transform GitHub-style alerts [!TIP], [!NOTE], etc.
+  content = content.replace(/>\s*\[!(TIP|NOTE|IMPORTANT|WARNING|CAUTION)\]\s*(.*)/g, (match, type, inlineContent) => {
+    return `> <strong class="alert-label ${type.toLowerCase()}">${type}</strong> ${inlineContent}`;
+  });
 
   // Extract TOC (even if not shown in UI, useful for metadata if needed later)
   const toc: { level: number; text: string; id: string }[] = [];
@@ -98,6 +104,7 @@ export async function getNoteData(slug: string, lang: 'EN' | 'VI'): Promise<Note
 
   const processedContent = await unified()
     .use(remarkParse)
+    .use(remarkGfm)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeCodeTitles)
     .use(rehypePrettyCode, {
