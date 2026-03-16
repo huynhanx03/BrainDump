@@ -37,7 +37,7 @@ export default async function LocaleLayout(props: {
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages();
-  
+
   // Pre-fetch directory structure on the server to avoid client-side flicker
   const structure = getDirectoryStructure();
 
@@ -52,8 +52,8 @@ export default async function LocaleLayout(props: {
             disableTransitionOnChange
           >
             <div className="flex h-screen overflow-hidden">
-              <NavSidebar 
-                className="hidden lg:flex w-80 flex-shrink-0" 
+              <NavSidebar
+                className="hidden lg:flex w-80 flex-shrink-0"
                 initialStructure={structure}
               />
               <div className="flex flex-col flex-1 overflow-hidden relative">

@@ -11,7 +11,9 @@ export function MarkdownRenderer({ contentHtml }: MarkdownRendererProps) {
     <article className="prose prose-slate dark:prose-invert max-w-none 
       prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tighter prose-headings:text-foreground
       prose-h1:hidden
-      prose-h2:text-xl md:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b-2 prose-h2:border-primary/5
+      prose-h2:text-2xl md:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:pb-3 prose-h2:border-b-2 prose-h2:border-primary/5
+      prose-h3:text-xl md:text-2xl prose-h3:mt-8 prose-h3:mb-4
+      prose-h4:text-lg md:text-xl prose-h4:mt-6 prose-h4:mb-2
       prose-p:text-base md:text-lg prose-p:leading-relaxed prose-p:text-foreground/80 prose-p:my-4
       prose-strong:text-foreground prose-strong:font-bold
       prose-a:text-primary prose-a:font-semibold prose-a:no-underline hover:prose-a:underline
